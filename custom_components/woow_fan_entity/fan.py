@@ -588,8 +588,8 @@ class SimpleFan(FanEntity, RestoreEntity):
             if result is None:
                 return
             try:
-                pct = int(float(result))
-                if 0 <= pct <= 100 and self._attr_percentage != pct:
+                pct = max(0, min(100, int(float(result))))
+                if self._attr_percentage != pct:
                     self._attr_percentage = pct
                     if pct > 0:
                         self._attr_preset_mode = None
